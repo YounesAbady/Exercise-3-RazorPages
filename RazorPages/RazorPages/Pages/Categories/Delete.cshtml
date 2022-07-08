@@ -1,0 +1,14 @@
+﻿@page
+@model RazorPages.Pages.Categories.DeleteModel
+@{
+    <form method="post">
+        <div>
+            <div class="mt-4">
+                <label asp-for="Category"></label>
+                <input asp-for="Category" disabled>
+            </div>
+            <br> <br>
+            <button type="submit" class="btn btn-danger"><i class="bi bi-trash3-fill">Delete</i></button>
+        </div>
+    </form>
+}
