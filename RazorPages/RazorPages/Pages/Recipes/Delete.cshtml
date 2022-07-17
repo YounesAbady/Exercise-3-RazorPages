@@ -1,0 +1,38 @@
+﻿@page
+@model RazorPages.Pages.Recipes.DeleteModel
+@{
+    <form method="post">
+        <div>
+            <div class="mt-4">
+                <label asp-for="Recipe.Title"></label>
+                <input asp-for="Recipe.Title" disabled>
+            </div>
+            <br> <br>
+            <div class="mt-4">
+                <label asp-for=Recipe.Ingredients></label>
+                @foreach (var obj in @Model.Recipe.Ingredients)
+                {
+                    <input asp-for=@obj disabled class="form-control">
+                }
+            </div>
+            <br> <br>
+            <div class="mt-4">
+                <label asp-for=Recipe.Instructions></label>
+                @foreach (var obj in @Model.Recipe.Instructions)
+                {
+                    <input asp-for=@obj disabled class="form-control">
+                }
+            </div>
+            <br> <br>
+            <div class="mt-4">
+                <label asp-for=Recipe.Categories></label>
+                @foreach (var obj in @Model.Recipe.Categories)
+                {
+                    <input asp-for=@obj disabled class="form-control">
+                }
+            </div>
+            <br> <br>
+            <button type="submit" class="btn btn-danger"><i class="bi bi-trash3-fill">Delete</i></button>
+        </div>
+    </form>
+}

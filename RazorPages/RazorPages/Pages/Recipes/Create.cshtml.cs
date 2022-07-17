@@ -1,28 +1,26 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Json;
 
-namespace RazorPages.Pages.Categories
+namespace RazorPages.Pages.Recipes
 {
     [BindProperties]
     public class CreateModel : PageModel
     {
         private static string _baseAddress = "https://localhost:7018";
-        [Required]
-        public string Category;
-        public async Task<IActionResult> OnPost(string category)
+        public Models.Recipe Recipe { get; set; }
+        public async Task<IActionResult> OnPost(string recipe)
         {
             if (ModelState.IsValid)
             {
                 var httpClient = HttpContext.RequestServices.GetService<IHttpClientFactory>();
                 var client = httpClient.CreateClient();
-                var jsonCategory = JsonSerializer.Serialize(category);
-                var content = new StringContent(jsonCategory, Encoding.UTF8, "application/json");
-                var request = await client.PostAsync($"{_baseAddress}/api/add-category/{category}", content);
+                var jsonRecipe = JsonSerializer.Serialize(recipe);
+                var content = new StringContent(jsonRecipe, Encoding.UTF8, "application/json");
+                var request = await client.PostAsync($"{_baseAddress}/api/add-recipe/{recipe}", content);
                 if (request.IsSuccessStatusCode)
-                    return RedirectToPage("ListCategories");
+                    return RedirectToPage("ListRecipes");
             }
             return RedirectToPage();
         }

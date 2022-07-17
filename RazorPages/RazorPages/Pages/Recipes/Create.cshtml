@@ -1,0 +1,33 @@
+﻿@page
+@model RazorPages.Pages.Recipes.CreateModel
+@{
+    <form method="post">
+        <div>
+            <div class="mt-4">
+                <label asp-for="Recipe.Title"></label>
+                <input asp-for="Recipe.Title" class="form-control">
+                <span asp-validation-for="Recipe.Title" class="text-danger"></span>
+            </div>
+            <br> <br>
+            <div class="mt-4">
+                <label asp-for="Recipe.Ingredients"></label>
+                <input asp-for="Recipe.Ingredients" class="form-control">
+                <span asp-validation-for="Recipe.Ingredients" class="text-danger"></span>
+            </div>
+            <br> <br>
+            <div class="mt-4">
+                <label asp-for="Recipe.Instructions"></label>
+                <input asp-for="Recipe.Instructions" class="form-control">
+                <span asp-validation-for="Recipe.Instructions" class="text-danger"></span>
+            </div>
+            <br> <br>
+            <div class="mt-4">
+                <label asp-for="Recipe.Categories"></label>
+                <input asp-for="Recipe.Categories" class="form-control">
+                <span asp-validation-for="Recipe.Categories" class="text-danger"></span>
+            </div>
+            <br> <br>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-check">Create</i></button>
+        </div>
+    </form>
+}

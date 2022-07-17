@@ -1,6 +1,10 @@
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpClient();
 // Add services to the container.
+builder.Services.AddRazorPages(options =>
+{
+    options.Conventions.AddPageRoute("/Home","");
+});
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
 var app = builder.Build();
