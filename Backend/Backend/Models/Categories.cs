@@ -1,6 +1,5 @@
 ﻿using System.Text.Json;
 using Spectre.Console;
-
 namespace Backend.Models
 {
     public class Categories
@@ -20,4 +19,4 @@ namespace Backend.Models
             AnsiConsole.Write(root);
         }
     }
-} 
+}

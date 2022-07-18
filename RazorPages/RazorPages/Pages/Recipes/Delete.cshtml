@@ -12,7 +12,7 @@
                 <label asp-for=Recipe.Ingredients></label>
                 @foreach (var obj in @Model.Recipe.Ingredients)
                 {
-                    <input asp-for=@obj disabled class="form-control">
+                    <input asp-for=@obj disabled>
                 }
             </div>
             <br> <br>
@@ -20,7 +20,7 @@
                 <label asp-for=Recipe.Instructions></label>
                 @foreach (var obj in @Model.Recipe.Instructions)
                 {
-                    <input asp-for=@obj disabled class="form-control">
+                    <input asp-for=@obj disabled >
                 }
             </div>
             <br> <br>
@@ -28,7 +28,7 @@
                 <label asp-for=Recipe.Categories></label>
                 @foreach (var obj in @Model.Recipe.Categories)
                 {
-                    <input asp-for=@obj disabled class="form-control">
+                    <input asp-for=@obj disabled >
                 }
             </div>
             <br> <br>

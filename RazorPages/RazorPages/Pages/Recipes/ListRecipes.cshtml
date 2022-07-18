@@ -2,7 +2,7 @@
 @model RazorPages.Pages.Recipes.ListRecipesModel
 @{
     <br />
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped table-hover">
         <thead>
             <tr>
                 <th>Recipe Name</th>
@@ -43,12 +43,12 @@
                             </p>
                         }
                     </td>
-                    <td>
+                    <td width="15%">
                         <a asp-page="Edit" asp-route-id="@recipe.Id" class="btn btn-primary">
-                            <i class="bi bi-pencil-square">Edit</i>
+                            <i class="bi bi-pencil-square"> Edit</i>
                         </a>
-                        <a asp-page="Delete" asp-route-id="@recipe.Id" class="btn btn-primary btn-danger align-content-around">
-                            <i class="bi bi-trash">Delete</i>
+                        <a asp-page="Delete" asp-route-id="@recipe.Id" class="btn btn-primary btn-danger">
+                            <i class="bi bi-trash"> Delete</i>
                         </a>
                     </td>
                 </tr>
@@ -56,6 +56,6 @@
         </tbody>
     </table>
     <div class="text-end">
-        <a asp-page="Create" class="btn btn-primary"><i class="bi bi-plus-square">Create new recipe</i></a>
+        <a asp-page="Create" class="btn btn-primary"><i class="bi bi-plus-square"> Create new recipe</i></a>
     </div>
 }

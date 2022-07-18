@@ -7,13 +7,17 @@ namespace RazorPages.Pages.Recipes
     [BindProperties]
     public class ListRecipesModel : PageModel
     {
-        private static string _baseAddress = "https://localhost:7018";
+        IConfiguration config = new ConfigurationBuilder()
+        .AddJsonFile("appsettings.json")
+        .AddEnvironmentVariables()
+        .Build();
         public List<Models.Recipe> Recipes { get; set; } = new List<Models.Recipe>();
         public async Task OnGet()
         {
             var httpClient = HttpContext.RequestServices.GetService<IHttpClientFactory>();
             var client = httpClient.CreateClient();
-            var request = await client.GetStringAsync($"{_baseAddress}/api/list-recipes");
+            client.BaseAddress = new Uri(config["BaseAddress"]);
+            var request = await client.GetStringAsync("/api/list-recipes");
             if (request != null)
             {
                 var options = new JsonSerializerOptions
@@ -22,7 +26,7 @@ namespace RazorPages.Pages.Recipes
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                     DictionaryKeyPolicy = JsonNamingPolicy.CamelCase
                 };
-                Recipes = JsonSerializer.Deserialize<List<Models.Recipe>>(request,options);
+                Recipes = JsonSerializer.Deserialize<List<Models.Recipe>>(request, options);
             }
         }
     }
