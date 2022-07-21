@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using FluentValidation;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
 namespace RazorPages.Models
@@ -30,5 +31,17 @@ namespace RazorPages.Models
         [JsonProperty("Categories")]
         [Required]
         public List<string> Categories { get; set; } = new List<string>();
+    }
+    public class RecipeValidator : AbstractValidator<Recipe>
+    {
+        public RecipeValidator()
+        {
+            RuleFor(x => x.Id).NotNull();
+            RuleFor(x => x.Title).NotNull();
+            RuleFor(x => x.Ingredients).NotNull().NotEmpty();
+            RuleFor(x => x.Instructions).NotNull().NotEmpty();
+            RuleFor(x => x.Categories).NotNull().NotEmpty();
+
+        }
     }
 }

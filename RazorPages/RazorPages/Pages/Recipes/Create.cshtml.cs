@@ -1,4 +1,7 @@
+using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Text;
 using System.Text.Json;
@@ -12,8 +15,13 @@ namespace RazorPages.Pages.Recipes
         .AddJsonFile("appsettings.json")
         .AddEnvironmentVariables()
         .Build();
+        private IValidator<Models.Recipe> _validator;
         public List<string> Categories = new List<string>();
         public Models.Recipe Recipe { get; set; }
+        public CreateModel(IValidator<Models.Recipe> validator)
+        {
+            _validator = validator;
+        }
         public async Task OnGet()
         {
             var httpClient = HttpContext.RequestServices.GetService<IHttpClientFactory>();
@@ -27,12 +35,16 @@ namespace RazorPages.Pages.Recipes
         }
         public async Task<IActionResult> OnPost(Models.Recipe recipe)
         {
-            var ing = recipe.Ingredients[0].Split("\r\n");
-            recipe.Ingredients = ing.ToList();
-            var ins = recipe.Instructions[0].Split("\r\n");
-            recipe.Instructions = ins.ToList();
-            if (ModelState.IsValid)
+            recipe.Instructions.RemoveAll(item => item == null);
+            recipe.Ingredients.RemoveAll(item => item == null);
+            recipe.Categories.RemoveAll(item => item == null);
+            ValidationResult result = await _validator.ValidateAsync(recipe);
+            if (result.IsValid)
             {
+                var ing = recipe.Ingredients[0].Split("\r\n");
+                recipe.Ingredients = ing.ToList();
+                var ins = recipe.Instructions[0].Split("\r\n");
+                recipe.Instructions = ins.ToList();
                 var httpClient = HttpContext.RequestServices.GetService<IHttpClientFactory>();
                 var client = httpClient.CreateClient();
                 client.BaseAddress = new Uri(config["BaseAddress"]);
@@ -42,7 +54,25 @@ namespace RazorPages.Pages.Recipes
                 if (request.IsSuccessStatusCode)
                     return RedirectToPage("ListRecipes");
             }
+            else
+            {
+                result.AddToModelState(this.ModelState);
+                return RedirectToPage("Create", recipe);
+            }
             return RedirectToPage();
+        }
+    }
+    public static class Extensions
+    {
+        public static void AddToModelState(this ValidationResult result, ModelStateDictionary modelState)
+        {
+            if (!result.IsValid)
+            {
+                foreach (var error in result.Errors)
+                {
+                    modelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
+            }
         }
     }
 }

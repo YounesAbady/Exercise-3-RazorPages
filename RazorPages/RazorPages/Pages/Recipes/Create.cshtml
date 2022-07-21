@@ -1,42 +1,43 @@
 ﻿@page
 @model RazorPages.Pages.Recipes.CreateModel
 @{
-
     <br />
-    <form method="post" class="align-content-center border border-2 border-dark rounded col-6 " style="margin:auto;text-align:center;background-color:lightgrey;">
-            <div>
-                <div class="mt-4 col-4 m-auto">
-                    <label asp-for="Recipe.Title" class="fw-bold"></label>
-                    <input asp-for="Recipe.Title" class="form-control">
-                    <span asp-validation-for="Recipe.Title" class="text-danger"></span>
-                </div>
-                <div class="mt-4 ">
-                    <label asp-for="Recipe.Ingredients" class="fw-bold"></label>
-                    <br>
-                    <textarea name="Recipe.Ingredients" placeholder="After every ingredient press enter for new line." rows="5" cols="30"></textarea>
-                    <span asp-validation-for="Recipe.Ingredients" class="text-danger"></span>
-                </div>
-                <div class="mt-4">
-                    <label asp-for="Recipe.Instructions" class="fw-bold"></label>
-                    <br>
-                    <textarea name="Recipe.Instructions" placeholder="After every instructions press enter for new line." rows="5" cols="30"></textarea>
-                    <span asp-validation-for="Recipe.Instructions" class="text-danger"></span>
-                </div>
-                <div class="mt-4">
-                    <form method="post">
-                        <label asp-for="Recipe.Categories" class="fw-bold">Choose one or more category</label>
-                        <br>
-                        <select name="Recipe.Categories" id="cars" multiple style="color:black">
-                            @foreach (var obj in Model.Categories)
-                        {
-                                <option value=@obj>@obj</option>
-                        }
-                        </select>
-                        <p>Hold down the Ctrl (windows) or Command (Mac) button to select multiple options.</p>
-                    </form>
-                </div>
-                <button type="submit" class="btn btn-outline-success"><i class="bi bi-plus-circle-fill"> Create</i></button>
-                <br><br>
+    <form method="post" class="align-content-center border border-1 border-dark rounded col-6 " style="margin:auto;text-align:center;background-color:lightgrey;">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div>
+            <div class="mt-4 col-4 m-auto">
+                <label asp-for="Recipe.Title" class="fw-bold"></label>
+                <input asp-for="Recipe.Title" class="form-control">
+                <span asp-validation-for="Recipe.Title" class="text-danger"></span>
             </div>
+            <div class="mt-4 ">
+                <label asp-for="Recipe.Ingredients" class="fw-bold"></label>
+                <br>
+                <textarea name="Recipe.Ingredients" placeholder="After every ingredient press enter for new line." rows="5" cols="30"></textarea>
+                <span asp-validation-for="Recipe.Ingredients" class="text-danger"></span>
+            </div>
+            <div class="mt-4">
+                <label asp-for="Recipe.Instructions" class="fw-bold"></label>
+                <br>
+                <textarea name="Recipe.Instructions" placeholder="After every instructions press enter for new line." rows="5" cols="30"></textarea>
+                <span asp-validation-for="Recipe.Instructions" class="text-danger"></span>
+            </div>
+            <div class="mt-4">
+                <form method="post">
+                    <label asp-for="Recipe.Categories" class="fw-bold">Choose one or more category</label>
+                    <br>
+                    <select name="Recipe.Categories" id="cars" multiple style="color:black">
+                        @foreach (var obj in Model.Categories)
+                        {
+                            <option value=@obj>@obj</option>
+                        }
+                    </select>
+                    <p>Hold down the Ctrl (windows) or Command (Mac) button to select multiple options.</p>
+                </form>
+            </div>
+            <button type="submit" class="btn btn-outline-success"><i class="bi bi-plus-circle-fill"> Create</i></button>
+            <br><br>
+        </div>
     </form>
+
 }

@@ -11,6 +11,8 @@ namespace RazorPages.Pages.Recipes
         .AddJsonFile("appsettings.json")
         .AddEnvironmentVariables()
         .Build();
+        [TempData]
+        string Message { get; set; }
         public Models.Recipe Recipe { get; set; }
         public async Task OnGet(Guid id)
         {

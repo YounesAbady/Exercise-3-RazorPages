@@ -1,15 +1,19 @@
 ﻿@page
 @model RazorPages.Pages.Categories.CreateModel
 @{
-    <form method="post" class="align-content-center border border-2 border-dark rounded col-4 m-auto mt-lg-5 " style="text-align:center;background-color:whitesmoke;">
+    <form method="post" class="align-content-center border border-1 border-dark rounded col-4 m-auto mt-lg-5 " style="text-align:center;background-color:lightgrey;">
         <div>
             <div class="mt-4">
                 <label asp-for="Category"></label>
-                <input asp-for="Category" >
+                <input asp-for="Category">
                 <span asp-validation-for="Category" class="text-danger"></span>
             </div>
             <br> <br>
             <button type="submit" class="btn btn-outline-success"><i class="bi bi-check">Create</i></button>
         </div>
     </form>
+    @section scripts{
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    }
 }

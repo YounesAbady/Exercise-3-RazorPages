@@ -1,7 +1,7 @@
 ﻿@page
 @model RazorPages.Pages.Recipes.DeleteModel
 @{
-    <form method="post" class="align-content-center border border-2 border-dark rounded col-6 mt-2 " style="margin:auto;text-align:center;background-color:lightgrey;">
+    <form method="post" class="align-content-center border border-1 border-dark rounded col-6 mt-2 " style="margin:auto;text-align:center;background-color:lightgrey;">
         <div>
             <div class="mt-4">
                 <label asp-for="Recipe.Title"></label>
@@ -22,7 +22,7 @@
                 <br>
                 @foreach (var obj in @Model.Recipe.Instructions)
                 {
-                    <input asp-for=@obj disabled>
+                    <input asp-for=@obj disabled class="col-8">
                     <br>
                 }
             </div>

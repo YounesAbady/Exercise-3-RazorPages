@@ -1,11 +1,17 @@
+using CurrieTechnologies.Razor.SweetAlert2;
+using FluentValidation;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpClient();
 // Add services to the container.
 builder.Services.AddRazorPages(options =>
 {
-    options.Conventions.AddPageRoute("/Home","");
+    options.Conventions.AddPageRoute("/Home", "");
 });
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+builder.Services.AddSweetAlert2();
+builder.Services.AddScoped<IValidator<RazorPages.Models.Recipe>, RazorPages.Models.RecipeValidator>();
+
 
 var app = builder.Build();
 
