@@ -2,34 +2,35 @@
 @model RazorPages.Pages.Categories.ListCategoriesModel
 @{
     <br />
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Category Name</th>
-            </tr>
-        </thead>
-        <tbody>
-            @{
+    <table class="table table-bordered table-hover table-secondary m-3">
+            <thead>
+                <tr>
+                    <th style="text-align:center;">Category Name</th>
+                    <th style="text-align:center;">Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
                 int i = 1;
-                @foreach (var category in Model.Categories)
+                        @foreach (var category in Model.Categories)
                 {
-                    <tr>
-                        <td width="50%">@category</td>
-                        <td width="20%" align="right">
-                            <a asp-page="Edit" asp-route-category="@category" asp-route-postion="@i" class="btn btn-primary">
-                                <i class="bi bi-pencil-square">Edit</i>
-                            </a>
-                            <a asp-page="Delete" asp-route-category="@category" class="btn btn-primary btn-danger align-content-around">
-                                <i class="bi bi-trash">Delete</i>
-                            </a>
-                        </td>
-                    </tr>
+                            <tr>
+                                <td width="50%">@category</td>
+                                <td width="10%" align="right">
+                                    <a asp-page="Edit" asp-route-category="@category" asp-route-postion="@i" class="btn btn-dark">
+                                        <i class="bi bi-pencil-square">Edit</i>
+                                    </a>
+                                    <a asp-page="Delete" asp-route-category="@category" class="btn btn-primary btn-danger">
+                                        <i class="bi bi-trash">Delete</i>
+                                    </a>
+                                </td>
+                            </tr>
                     i++;
                 }
-            }
-        </tbody>
+                }
+            </tbody>
     </table>
     <div class="text-end">
-        <a asp-page="Create" class="btn btn-primary"><i class="bi bi-plus-square">Create new category</i></a>
+            <a asp-page="Create" class="btn btn-secondary"><i class="bi bi-plus-square">Create new category</i></a>
     </div>
 }

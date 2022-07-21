@@ -1,22 +1,22 @@
 ﻿@page
 @model RazorPages.Pages.Recipes.ListRecipesModel
 @{
-    <br />
-    <table class="table table-bordered table-striped table-hover">
+    <table class="table table-bordered table-hover table-secondary m-3">
         <thead>
             <tr>
-                <th>Recipe Name</th>
-                <th>Ingredients</th>
-                <th>Instructions</th>
-                <th>Categories</th>
+                <th style="text-align:center;">Recipe Name</th>
+                <th style="text-align:center;">Ingredients</th>
+                <th style="text-align:center;">Instructions</th>
+                <th style="text-align:center;">Categories</th>
+                <th style="text-align:center;">Options</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var recipe in Model.Recipes)
             {
                 <tr>
-                    <td>@recipe.Title</td>
-                    <td>
+                    <td width="15%">@recipe.Title</td>
+                    <td width="20%">
                         @foreach (var obj in recipe.Ingredients)
                         {
                             <p>
@@ -25,7 +25,7 @@
                             </p>
                         }
                     </td>
-                    <td>
+                    <td width="40%">
                         @foreach (var obj in recipe.Instructions)
                         {
                             <p>
@@ -43,8 +43,8 @@
                             </p>
                         }
                     </td>
-                    <td width="15%">
-                        <a asp-page="Edit" asp-route-id="@recipe.Id" class="btn btn-primary">
+                    <td width="16%">
+                        <a asp-page="Edit" asp-route-id="@recipe.Id" class="btn btn-dark">
                             <i class="bi bi-pencil-square"> Edit</i>
                         </a>
                         <a asp-page="Delete" asp-route-id="@recipe.Id" class="btn btn-primary btn-danger">
@@ -56,6 +56,6 @@
         </tbody>
     </table>
     <div class="text-end">
-        <a asp-page="Create" class="btn btn-primary"><i class="bi bi-plus-square"> Create new recipe</i></a>
+        <a asp-page="Create" class="btn btn-secondary"><i class="bi bi-plus-square"> Create new recipe</i></a>
     </div>
 }

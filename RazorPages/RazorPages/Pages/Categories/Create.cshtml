@@ -1,7 +1,7 @@
 ﻿@page
 @model RazorPages.Pages.Categories.CreateModel
 @{
-    <form method="post">
+    <form method="post" class="align-content-center border border-2 border-dark rounded col-4 m-auto mt-lg-5 " style="text-align:center;background-color:whitesmoke;">
         <div>
             <div class="mt-4">
                 <label asp-for="Category"></label>
@@ -9,7 +9,7 @@
                 <span asp-validation-for="Category" class="text-danger"></span>
             </div>
             <br> <br>
-            <button type="submit" class="btn btn-primary"><i class="bi bi-check">Create</i></button>
+            <button type="submit" class="btn btn-outline-success"><i class="bi bi-check">Create</i></button>
         </div>
     </form>
 }
