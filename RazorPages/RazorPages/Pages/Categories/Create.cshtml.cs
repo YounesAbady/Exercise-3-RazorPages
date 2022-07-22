@@ -15,11 +15,15 @@ namespace RazorPages.Pages.Categories
         .AddJsonFile("appsettings.json")
         .AddEnvironmentVariables()
         .Build();
+        [TempData]
+        public string Msg { get; set; }
+        [TempData]
+        public string Status { get; set; }
         [Required]
         public string Category;
         public async Task<IActionResult> OnPost(string category)
         {
-            if (ModelState.IsValid)
+            if (category!=null)
             {
                 var httpClient = HttpContext.RequestServices.GetService<IHttpClientFactory>();
                 var client = httpClient.CreateClient();
@@ -29,8 +33,16 @@ namespace RazorPages.Pages.Categories
                 var request = await client.PostAsync($"/api/add-category/{category}", content);
                 if (request.IsSuccessStatusCode)
                 {
+                    Msg = "Successfully Created!";
+                    Status = "success";
                     return RedirectToPage("ListCategories");
                 }
+            }
+            else
+            {
+                Msg = "cant be null!";
+                Status = "error";
+                return RedirectToPage();
             }
             return RedirectToPage();
         }

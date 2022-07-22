@@ -1,4 +1,19 @@
 ﻿@page
+@if (@Model.Msg != null)
+{
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    if (@Model.Status == "error")
+    {
+        <script type="text/javascript">
+            Swal.fire({
+                icon: 'error',
+                title: '@Model.Msg',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        </script>
+    }
+}
 @model RazorPages.Pages.Categories.CreateModel
 @{
     <form method="post" class="align-content-center border border-1 border-dark rounded col-4 m-auto mt-lg-5 " style="text-align:center;background-color:lightgrey;">
@@ -12,8 +27,4 @@
             <button type="submit" class="btn btn-outline-success"><i class="bi bi-check">Create</i></button>
         </div>
     </form>
-    @section scripts{
-        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-    }
 }

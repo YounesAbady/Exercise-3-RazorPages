@@ -1,4 +1,19 @@
 ﻿@page
+@if (@Model.Msg != null)
+{
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    if (@Model.Status == "success")
+    {
+        <script type="text/javascript">
+            Swal.fire({
+                icon: 'success',
+                title: '@Model.Msg',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        </script>
+    }
+}
 @model RazorPages.Pages.Recipes.ListRecipesModel
 @{
     <table class="table table-bordered table-hover table-secondary m-3">

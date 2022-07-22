@@ -12,6 +12,10 @@ namespace RazorPages.Pages.Recipes
     [BindProperties]
     public class CreateModel : PageModel
     {
+        [TempData]
+        public string Msg { get; set; }
+        [TempData]
+        public string Status { get; set; }
         IConfiguration config = new ConfigurationBuilder()
         .AddJsonFile("appsettings.json")
         .AddEnvironmentVariables()
@@ -53,7 +57,11 @@ namespace RazorPages.Pages.Recipes
                 var content = new StringContent(jsonRecipe, Encoding.UTF8, "application/json");
                 var request = await client.PostAsync($"/api/add-recipe/{jsonRecipe}", content);
                 if (request.IsSuccessStatusCode)
+                {
+                    Msg = "Successfully Created!";
+                    Status = "success";
                     return RedirectToPage("ListRecipes");
+                }
             }
             else
             {

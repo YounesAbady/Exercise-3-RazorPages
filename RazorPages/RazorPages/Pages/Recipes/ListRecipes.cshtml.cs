@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Text.Json;
-
 namespace RazorPages.Pages.Recipes
 {
     [BindProperties]
@@ -11,6 +10,10 @@ namespace RazorPages.Pages.Recipes
         .AddJsonFile("appsettings.json")
         .AddEnvironmentVariables()
         .Build();
+        [TempData]
+        public string Msg { get; set; }
+        [TempData]
+        public string Status { get; set; }
         public List<Models.Recipe> Recipes { get; set; } = new List<Models.Recipe>();
         public async Task OnGet()
         {

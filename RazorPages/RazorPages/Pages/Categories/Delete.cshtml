@@ -1,4 +1,24 @@
 ﻿@page
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Good To go!',
+                    'You can delete it now!'
+                )
+                document.getElementById("isWorking").disabled = false;
+            }
+        })
+</script>
 @model RazorPages.Pages.Categories.DeleteModel
 @{
     <form method="post" class="align-content-center border border-1 border-dark rounded col-4 m-auto mt-lg-5 " style="text-align:center;background-color:lightgrey;">
@@ -8,7 +28,7 @@
                 <input asp-for="Category" disabled>
             </div>
             <br> <br>
-            <button type="submit" class="btn btn-danger"><i class="bi bi-trash3-fill">Delete</i></button>
+            <button id="isWorking" type="submit" class="btn btn-danger" disabled><i class="bi bi-trash3-fill">Delete</i></button>
         </div>
     </form>
 }

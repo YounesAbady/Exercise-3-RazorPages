@@ -10,6 +10,10 @@ namespace RazorPages.Pages.Categories
         .AddJsonFile("appsettings.json")
         .AddEnvironmentVariables()
         .Build();
+        [TempData]
+        public string Msg { get; set; }
+        [TempData]
+        public string Status { get; set; }
         public string Category { get; set; }
         public void OnGet(string category)
         {
@@ -22,7 +26,11 @@ namespace RazorPages.Pages.Categories
             client.BaseAddress = new Uri(config["BaseAddress"]);
             var request = await client.DeleteAsync($"/api/delete-category/{Category}");
             if (request.IsSuccessStatusCode)
+            {
+                Msg = "Successfully Deleted!";
+                Status = "success";
                 return RedirectToPage("ListCategories");
+            }
             return RedirectToPage();
         }
     }

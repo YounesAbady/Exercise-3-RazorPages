@@ -15,6 +15,10 @@ namespace RazorPages.Pages.Recipes
         .AddJsonFile("appsettings.json")
         .AddEnvironmentVariables()
         .Build();
+        [TempData]
+        public string Msg { get; set; }
+        [TempData]
+        public string Status { get; set; }
         private IValidator<Models.Recipe> _validator;
         public List<string> Categories = new List<string>();
 
@@ -65,12 +69,16 @@ namespace RazorPages.Pages.Recipes
                 var content = new StringContent(jsonRecipe, Encoding.UTF8, "application/json");
                 var request = await client.PutAsync($"/api/update-recipe/{jsonRecipe}/{id}", content);
                 if (request.IsSuccessStatusCode)
+                {
+                    Msg = "Successfully Edited!";
+                    Status = "success";
                     return RedirectToPage("ListRecipes");
+                }
             }
             else
             {
                 result.AddToModelState(this.ModelState);
-                return RedirectToPage("Create", recipe);
+                return RedirectToPage("Edit", recipe);
             }
             return RedirectToPage();
         }

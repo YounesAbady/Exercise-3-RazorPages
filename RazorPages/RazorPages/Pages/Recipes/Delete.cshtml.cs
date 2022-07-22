@@ -12,7 +12,9 @@ namespace RazorPages.Pages.Recipes
         .AddEnvironmentVariables()
         .Build();
         [TempData]
-        string Message { get; set; }
+        public string Msg { get; set; }
+        [TempData]
+        public string Status { get; set; }
         public Models.Recipe Recipe { get; set; }
         public async Task OnGet(Guid id)
         {
@@ -38,7 +40,11 @@ namespace RazorPages.Pages.Recipes
             client.BaseAddress = new Uri(config["BaseAddress"]);
             var request = await client.DeleteAsync($"/api/delete-recipe/{Recipe.Id}");
             if (request.IsSuccessStatusCode)
+            {
+                Msg = "Successfully Deleted!";
+                Status = "success";
                 return RedirectToPage("ListRecipes");
+            }
             return RedirectToPage();
         }
     }
