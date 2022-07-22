@@ -1,5 +1,8 @@
+using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using RazorPages.Extensions;
 using System.Text;
 using System.Text.Json;
 
@@ -12,9 +15,14 @@ namespace RazorPages.Pages.Recipes
         .AddJsonFile("appsettings.json")
         .AddEnvironmentVariables()
         .Build();
+        private IValidator<Models.Recipe> _validator;
         public List<string> Categories = new List<string>();
 
         public Models.Recipe Recipe { get; set; }
+        public EditModel(IValidator<Models.Recipe> validator)
+        {
+            _validator = validator;
+        }
         public async Task OnGet(Guid id)
         {
             var httpClient = HttpContext.RequestServices.GetService<IHttpClientFactory>();
@@ -40,7 +48,11 @@ namespace RazorPages.Pages.Recipes
         }
         public async Task<IActionResult> OnPost(Models.Recipe recipe, Guid id)
         {
-            if (ModelState.IsValid)
+            recipe.Instructions.RemoveAll(item => item == null);
+            recipe.Ingredients.RemoveAll(item => item == null);
+            recipe.Categories.RemoveAll(item => item == null);
+            ValidationResult result = await _validator.ValidateAsync(recipe);
+            if (result.IsValid)
             {
                 var ing = recipe.Ingredients[0].Split("\r\n");
                 recipe.Ingredients = ing.ToList();
@@ -54,6 +66,11 @@ namespace RazorPages.Pages.Recipes
                 var request = await client.PutAsync($"/api/update-recipe/{jsonRecipe}/{id}", content);
                 if (request.IsSuccessStatusCode)
                     return RedirectToPage("ListRecipes");
+            }
+            else
+            {
+                result.AddToModelState(this.ModelState);
+                return RedirectToPage("Create", recipe);
             }
             return RedirectToPage();
         }

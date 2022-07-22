@@ -3,6 +3,7 @@ using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using RazorPages.Extensions;
 using System.Text;
 using System.Text.Json;
 
@@ -60,19 +61,6 @@ namespace RazorPages.Pages.Recipes
                 return RedirectToPage("Create", recipe);
             }
             return RedirectToPage();
-        }
-    }
-    public static class Extensions
-    {
-        public static void AddToModelState(this ValidationResult result, ModelStateDictionary modelState)
-        {
-            if (!result.IsValid)
-            {
-                foreach (var error in result.Errors)
-                {
-                    modelState.AddModelError(error.PropertyName, error.ErrorMessage);
-                }
-            }
         }
     }
 }
