@@ -44,7 +44,7 @@ namespace RazorPages.Pages.Categories
             }
             else
             {
-                Msg = "cant be null!";
+                Msg = "cant be empty!";
                 Status = "error";
                 return RedirectToPage("ListCategories");
             }

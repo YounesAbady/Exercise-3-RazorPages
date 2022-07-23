@@ -77,7 +77,11 @@ namespace RazorPages.Pages.Recipes
             }
             else
             {
-                result.AddToModelState(this.ModelState);
+                foreach (var error in result.Errors)
+                {
+                    Msg += ($"{error.ErrorMessage} \n");
+                }
+                Status = "error";
                 return RedirectToPage("Edit", recipe);
             }
             return RedirectToPage();

@@ -1,5 +1,19 @@
 ﻿@page
 @model RazorPages.Pages.Recipes.EditModel
+@if (@Model.Msg != null)
+{
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    if (@Model.Status == "error")
+    {
+        <script type="text/javascript">
+            Swal.fire({
+                icon: 'error',
+                title: '@Model.Msg',
+                showConfirmButton: true,
+            })
+        </script>
+    }
+}
 @{
     <form method="post" class="align-content-center border border-1 border-dark rounded col-6 mt-2 " style="margin:auto;text-align:center;background-color:lightgrey;">
         <div>

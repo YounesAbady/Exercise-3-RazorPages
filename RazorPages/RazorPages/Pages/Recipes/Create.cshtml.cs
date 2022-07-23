@@ -27,7 +27,7 @@ namespace RazorPages.Pages.Recipes
         {
             _validator = validator;
         }
-        public async Task OnGet()
+        public async Task OnGet(Models.Recipe? recipe)
         {
             var httpClient = HttpContext.RequestServices.GetService<IHttpClientFactory>();
             var client = httpClient.CreateClient();
@@ -37,6 +37,8 @@ namespace RazorPages.Pages.Recipes
             {
                 Categories = JsonSerializer.Deserialize<List<string>>(request);
             }
+            if (recipe != null)
+                Recipe = recipe;
         }
         public async Task<IActionResult> OnPost(Models.Recipe recipe)
         {
@@ -65,7 +67,11 @@ namespace RazorPages.Pages.Recipes
             }
             else
             {
-                result.AddToModelState(this.ModelState);
+                foreach (var error in result.Errors)
+                {
+                    Msg+=($"{error.ErrorMessage} \n");
+                }
+                Status="error";
                 return RedirectToPage("Create", recipe);
             }
             return RedirectToPage();
