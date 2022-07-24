@@ -10,7 +10,7 @@ builder.Services.AddRazorPages(options =>
 });
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddSweetAlert2();
-builder.Services.AddScoped<IValidator<RazorPages.Models.Recipe>, RazorPages.Models.RecipeValidator>();
+builder.Services.AddScoped<IValidator<RazorPages.Models.Recipe>, RazorPages.Models.Recipe.RecipeValidator>();
 
 
 var app = builder.Build();

@@ -10,11 +10,10 @@ namespace Backend.Controllers
         private static List<string> s_categoriesNames { get; set; } = new List<string>();
         public RecipeController()
         {
-            string startupPath = Environment.CurrentDirectory;
-            string fileName = @$"{startupPath}\Recipes.json";
+            string fileName = PathCombine(Environment.CurrentDirectory, @"\Recipes.json");
             string jsonString = File.ReadAllText(fileName);
             s_recipes = JsonSerializer.Deserialize<List<Recipe>>(jsonString);
-            fileName = @$"{startupPath}\Categories.json";
+            fileName = PathCombine(Environment.CurrentDirectory,@"\Categories.json");
             jsonString = File.ReadAllText(fileName);
             s_categoriesNames = JsonSerializer.Deserialize<List<string>>(jsonString);
         }
@@ -35,8 +34,7 @@ namespace Backend.Controllers
         public void AddCategory(string category)
         {
             s_categoriesNames.Add(category);
-            string startupPath = Environment.CurrentDirectory;
-            string fileName = @$"{startupPath}\Categories.json";
+            string fileName = PathCombine(Environment.CurrentDirectory, @"\Categories.json");
             string jsonString = JsonSerializer.Serialize(s_categoriesNames);
             File.WriteAllText(fileName, jsonString);
         }
@@ -46,8 +44,7 @@ namespace Backend.Controllers
         {
             Recipe recipe = JsonSerializer.Deserialize<Recipe>(jsonRecipe);
             s_recipes.Add(recipe);
-            string startupPath = Environment.CurrentDirectory;
-            string fileName = @$"{startupPath}\Recipes.json";
+            string fileName = PathCombine(Environment.CurrentDirectory, @"\Recipes.json");
             string jsonString = JsonSerializer.Serialize(s_recipes);
             File.WriteAllText(fileName, jsonString);
         }
@@ -61,11 +58,10 @@ namespace Backend.Controllers
                 if (recipe.Categories.Contains(category))
                     recipe.Categories.Remove(category);
             }
-            string startupPath = Environment.CurrentDirectory;
-            string fileName = @$"{startupPath}\Categories.json";
+            string fileName = PathCombine(Environment.CurrentDirectory, @"\Categories.json");
             string jsonString = JsonSerializer.Serialize(s_categoriesNames);
             File.WriteAllText(fileName, jsonString);
-            fileName = @$"{startupPath}\Recipes.json";
+            fileName = PathCombine(Environment.CurrentDirectory, @"\Recipes.json");
             jsonString = JsonSerializer.Serialize(s_recipes);
             File.WriteAllText(fileName, jsonString);
         }
@@ -81,11 +77,10 @@ namespace Backend.Controllers
                 }
             }
             s_categoriesNames[int.Parse(position) - 1] = newCategory;
-            string startupPath = Environment.CurrentDirectory;
-            string fileName = @$"{startupPath}\Categories.json";
+            string fileName = PathCombine(Environment.CurrentDirectory, @"\Categories.json");
             string jsonString = JsonSerializer.Serialize(s_categoriesNames);
             File.WriteAllText(fileName, jsonString);
-            fileName = @$"{startupPath}\Recipes.json";
+            fileName = PathCombine(Environment.CurrentDirectory, @"\Recipes.json");
             jsonString = JsonSerializer.Serialize(s_recipes);
             File.WriteAllText(fileName, jsonString);
         }
@@ -95,8 +90,7 @@ namespace Backend.Controllers
         {
             Recipe recipe = s_recipes.FirstOrDefault(x => x.Id == id);
             s_recipes.Remove(recipe);
-            string startupPath = Environment.CurrentDirectory;
-            var fileName = @$"{startupPath}\Recipes.json";
+            string fileName = PathCombine(Environment.CurrentDirectory, @"\Recipes.json");
             var jsonString = JsonSerializer.Serialize(s_recipes);
             File.WriteAllText(fileName, jsonString);
         }
@@ -110,8 +104,7 @@ namespace Backend.Controllers
             oldRecipe.Categories = newRecipe.Categories;
             oldRecipe.Ingredients = newRecipe.Ingredients;
             oldRecipe.Instructions = newRecipe.Instructions;
-            string startupPath = Environment.CurrentDirectory;
-            var fileName = @$"{startupPath}\Recipes.json";
+            var fileName = PathCombine(Environment.CurrentDirectory, @"\Recipes.json");
             var jsonString = JsonSerializer.Serialize(s_recipes);
             File.WriteAllText(fileName, jsonString);
         }
@@ -121,6 +114,15 @@ namespace Backend.Controllers
         {
             var recipe = s_recipes.FirstOrDefault(x => x.Id == id);
             return recipe;
+        }
+        public string PathCombine(string path1, string path2)
+        {
+            if (Path.IsPathRooted(path2))
+            {
+                path2 = path2.TrimStart(Path.DirectorySeparatorChar);
+                path2 = path2.TrimStart(Path.AltDirectorySeparatorChar);
+            }
+            return Path.Combine(path1, path2);
         }
     }
 }
