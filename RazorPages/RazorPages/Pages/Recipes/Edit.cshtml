@@ -15,64 +15,62 @@
     }
 }
 @{
-    <form method="post" class="align-content-center border border-1 border-dark rounded col-6 mt-2 " style="margin:auto;text-align:center;background-color:lightgrey;">
-        <div>
-            <label asp-for="Recipe.Id" hidden></label>
-            <input asp-for="Recipe.Id" hidden>
-            <div class="mt-4 col-4 m-auto">
-                <label asp-for="Recipe.Title"></label>
-                <input asp-for="Recipe.Title">
-            </div>
-            <div class="mt-4">
-                <label asp-for="Recipe.Ingredients"></label>
-                <br>
-                <textarea name="Recipe.Ingredients" placeholder="After every ingredient press enter for new line." rows="4" cols="30">@foreach (var obj in Model.Recipe.Ingredients)
+    <form method="post" class="align-content-center col-6 " style="margin:auto;text-align:center;margin-top:50px;color:#1A2238">
+            <div>
+                <label asp-for="Recipe.Id" hidden></label>
+                <input asp-for="Recipe.Id" hidden>
+                <div class="row mt-4 col-11 m-auto">
+                    <label style="text-align:left;font-weight:bold;font-size:large" asp-for="Recipe.Title"></label>
+                    <input asp-for="Recipe.Title">
+                </div>
+                <div class="row mt-4 col-11 m-auto">
+                    <label style="font:bolder;text-align:left" asp-for="Recipe.Ingredients" class="fw-bold"></label>
+                    <textarea name="Recipe.Ingredients" placeholder="After every ingredient press enter for new line." rows="4" cols="30">@foreach (var obj in Model.Recipe.Ingredients)
                     {
                         if (obj != Model.Recipe.Ingredients.Last())
-                            @obj.Insert(obj.Length,"\r\n")
+                                @obj.Insert(obj.Length,"\r\n")
                         else
-                            @obj
+                                @obj
                     }</textarea>
-                <span asp-validation-for="Recipe.Ingredients" class="text-danger"></span>
-            </div>
-            <div class="mt-4">
-                <label asp-for="Recipe.Instructions"></label>
-                <br>
-                <textarea name="Recipe.Instructions" placeholder="After every instructions press enter for new line." rows="4" cols="30">@foreach (var obj in Model.Recipe.Instructions)
+                    <span asp-validation-for="Recipe.Ingredients" class="text-danger"></span>
+                </div>
+                <div class="row mt-4 col-11 m-auto">
+                    <label style="text-align:left;font-weight:bold;font-size:large" asp-for="Recipe.Instructions" class="fw-bold"></label>
+                    <textarea name="Recipe.Instructions" placeholder="After every instructions press enter for new line." rows="4" cols="30">@foreach (var obj in Model.Recipe.Instructions)
                     {
                         if (obj != Model.Recipe.Instructions.Last())
-                            @obj.Insert(obj.Length,"\r\n")
+                                @obj.Insert(obj.Length,"\r\n")
                         else
-                            @obj
+                                @obj
                     }</textarea>
-                <span asp-validation-for="Recipe.Instructions" class="text-danger"></span>
-            </div>
-            <div class="mt-4 text-dark">
-                Old Categories:
-                @foreach (var obj in @Model.Recipe.Categories)
+                    <span asp-validation-for="Recipe.Instructions" class="text-danger"></span>
+                </div>
+                <div class="mt-4 text-dark" style="font-weight:bold;font-size:medium">
+                    Old Categories:
+                    @foreach (var obj in @Model.Recipe.Categories)
                 {
                     if (obj != @Model.Recipe.Categories.Last())
-                        @obj.Insert(obj.Length," - ")
+                            @obj.Insert(obj.Length," - ")
                     else
-                        @obj
+                            @obj
                 }
-                <br>
-                <span class="text-danger" style="font-size:large">All old categories will be deleted!<br> Please select new ones.</span>
-            </div>
-            <div class="mt-4">
-                <form method="post">
-                    <label asp-for="Recipe.Categories">Choose one or more new category:</label>
                     <br>
-                    <select name="Recipe.Categories" id="cars" multiple style="color:black">
-                        @foreach (var obj in Model.Categories)
+                    <span class="text-danger" style="font-size:large">All old categories will be deleted!<br> Please select new ones.</span>
+                </div>
+                <div class="row mt-4 col-11 m-auto">
+                    <form method="post">
+                        <label style="text-align:left;font-weight:bold;font-size:large" asp-for="Recipe.Categories" class="fw-bold">Choose one or more category</label>
+                        <br>
+                        <select name="Recipe.Categories" id="cars" multiple style="color:black">
+                            @foreach (var obj in Model.Categories)
                         {
-                            <option value=@obj>@obj</option>
+                                <option value=@obj>@obj</option>
                         }
-                    </select>
-                    <p>Hold down the Ctrl (windows) or Command (Mac) button to select multiple options.</p>
-                </form>
+                        </select>
+                        <p style="font-weight:bold">Hold down the Ctrl (windows) or Command (Mac) button to select multiple options.</p>
+                    </form>
+                </div>
+                <button type="submit" class="btn btn-success"><i class="bi bi-pencil-square">Edit</i></button>
             </div>
-            <button type="submit" class="btn btn-outline-success"><i class="bi bi-pencil-square">Edit</i></button>
-        </div>
     </form>
 }

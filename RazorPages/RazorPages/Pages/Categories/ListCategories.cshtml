@@ -27,36 +27,28 @@
 }
 @model RazorPages.Pages.Categories.ListCategoriesModel
 @{
-    <br />
-    <table class="table table-bordered table-hover table-secondary m-3">
-        <thead>
-            <tr>
-                <th style="text-align:center;">Category Name</th>
-                <th style="text-align:center;">Options</th>
-            </tr>
-        </thead>
-        <tbody>
-            @{
-                int i = 1;
-                @foreach (var category in Model.Categories)
-                {
-                    <tr>
-                        <td width="50%">@category</td>
-                        <td width="10%" align="right">
-                            <a asp-page="Edit" asp-route-category="@category" asp-route-postion="@i" class="btn btn-dark">
+
+    int i = 1;
+    <div class="row row-cols-1 row-cols-md-4 g-2 text-center">
+            @foreach (var item in @Model.Categories)
+        {
+                <div class="col">
+                    <div class="card h-100 text-center" style="background-color:#1A2238;margin-left:2px;margin-top:5px;">
+                        <div class="card-body">
+                            <h5 class="card-title">@item</h5>
+                            <a asp-page="Edit" asp-route-category="@item" asp-route-postion="@i" class="btn btn-dark" style="background-color:#FF6A3D;color:white;margin-top:10px;">
                                 <i class="bi bi-pencil-square">Edit</i>
                             </a>
-                            <a asp-page="Delete" asp-route-category="@category" class="btn btn-primary btn-danger">
+                            <a asp-page="Delete" asp-route-category="@item" class="btn btn-primary btn-danger" style="color:white;margin-top:10px;">
                                 <i class="bi bi-trash">Delete</i>
                             </a>
-                        </td>
-                    </tr>
-                    i++;
-                }
-            }
-        </tbody>
-    </table>
+                        </div>
+                    </div>
+                </div>
+            i++;
+        }
+    </div>
     <div class="text-end">
-        <a asp-page="Create" class="btn btn-secondary"><i class="bi bi-plus-square">Create new category</i></a>
+            <a asp-page="Create" class="btn" style="background-color:#1A2238;color:#FF6A3D;font-weight:bold;margin-top:25px;"><i class="bi bi-plus-square"> Create new category</i></a>
     </div>
 }

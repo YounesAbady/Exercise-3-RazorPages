@@ -16,15 +16,15 @@
 }
 @model RazorPages.Pages.Categories.CreateModel
 @{
-    <form method="post" class="align-content-center border border-1 border-dark rounded col-4 m-auto mt-lg-5 " style="text-align:center;background-color:lightgrey;">
-        <div>
+    <form method="post" class="align-content-center col-6 " style="margin:auto;text-align:center;margin-top:50px;color:#1A2238">
+        <div class="text-center" style="margin-top:25%;margin-right:50px;">
             <div class="mt-4">
-                <label asp-for="Category"></label>
+                <label style="font-weight:bolder;text-align:left;font-size:large" asp-for="Category"></label>:
                 <input asp-for="Category">
                 <span asp-validation-for="Category" class="text-danger"></span>
             </div>
             <br> <br>
-            <button type="submit" class="btn btn-outline-success"><i class="bi bi-check">Create</i></button>
+            <button type="submit" class="btn btn-success text-center"><i class="bi bi-check">Create</i></button>
         </div>
     </form>
 }

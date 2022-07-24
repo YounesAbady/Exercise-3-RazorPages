@@ -16,61 +16,56 @@
 }
 @model RazorPages.Pages.Recipes.ListRecipesModel
 @{
-    <table class="table table-bordered table-hover table-secondary m-3">
-        <thead>
-            <tr>
-                <th style="text-align:center;">Recipe Name</th>
-                <th style="text-align:center;">Ingredients</th>
-                <th style="text-align:center;">Instructions</th>
-                <th style="text-align:center;">Categories</th>
-                <th style="text-align:center;">Options</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var recipe in Model.Recipes)
-            {
-                <tr>
-                    <td width="15%">@recipe.Title</td>
-                    <td width="20%">
-                        @foreach (var obj in recipe.Ingredients)
-                        {
-                            <p>
-                                -
-                                @obj
-                            </p>
-                        }
-                    </td>
-                    <td width="40%">
-                        @foreach (var obj in recipe.Instructions)
-                        {
-                            <p>
-                                -
-                                @obj
-                            </p>
-                        }
-                    </td>
-                    <td>
-                        @foreach (var obj in recipe.Categories)
-                        {
-                            <p>
-                                -
-                                @obj
-                            </p>
-                        }
-                    </td>
-                    <td width="16%">
-                        <a asp-page="Edit" asp-route-id="@recipe.Id" class="btn btn-dark">
+    <div class="row row-cols-1 row-cols-md-4 g-2 text-center">
+        @foreach (var recipe in @Model.Recipes)
+        {
+            <div class="col">
+                <div class="card h-100 text-center" style="background-color:#1A2238;margin-left:2px;margin-top:5px;">
+                    <div class="card-body">
+                        <h5 class="card-title">@recipe.Title</h5>
+                        <button class="btn" style="background-color:#F4DB7D;color:black" type="button" data-bs-toggle="collapse" data-bs-target=@("#"+"ing"+recipe.Id) aria-expanded="false" aria-controls=@("ing"+recipe.Id)>
+                            <i class="bi bi-search"> Show Ingredients</i>
+                        </button>
+                        <div class="collapse" id=@("ing"+recipe.Id) style="color:white">
+                            @foreach (var ing in @recipe.Ingredients)
+                            {
+                                <p class="card-text">- @ing</p>
+                            }
+                        </div>
+                        <br>
+                        <button class="btn" style="background-color:#F4DB7D;color:black;margin-top:10px;" type="button" data-bs-toggle="collapse" data-bs-target=@("#"+"ins"+recipe.Id) aria-expanded="false" aria-controls=@("ins"+recipe.Id)>
+                            <i class="bi bi-search"> Show Instructions</i>
+                        </button>
+                        <div class="collapse" id=@("ins"+recipe.Id) style="color:white">
+                            @foreach (var ins in @recipe.Instructions)
+                            {
+                                <p class="card-text">- @ins</p>
+                            }
+                        </div>
+                        <br>
+                        <button class="btn" style="background-color:#F4DB7D;color:black;margin-top:10px;" type="button" data-bs-toggle="collapse" data-bs-target=@("#"+"cat"+recipe.Id) aria-expanded="false" aria-controls=@("cat"+recipe.Id)>
+                            <i class="bi bi-search"> Show Categories</i>
+                        </button>
+                        <div class="collapse" id=@("cat"+recipe.Id) style="color:white">
+                            @foreach (var cat in @recipe.Categories)
+                            {
+                                <p class="card-text">- @cat</p>
+                            }
+                        </div>
+                        <br>
+                        <a asp-page="Edit" asp-route-id="@recipe.Id" class="btn text-end" style="background-color:#FF6A3D;color:white;margin-top:10px;">
                             <i class="bi bi-pencil-square"> Edit</i>
                         </a>
-                        <a asp-page="Delete" asp-route-id="@recipe.Id" class="btn btn-primary btn-danger">
+                        <a asp-page="Delete" asp-route-id="@recipe.Id" class="btn text-end btn-primary btn-danger" style="margin-top:10px;">
                             <i class="bi bi-trash"> Delete</i>
                         </a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
     <div class="text-end">
-        <a asp-page="Create" class="btn btn-secondary"><i class="bi bi-plus-square"> Create new recipe</i></a>
+        <a asp-page="Create" class="btn" style="background-color:#1A2238;color:#FF6A3D;font-weight:bold;"><i class="bi bi-plus-square"> Create new recipe</i></a>
     </div>
 }
+

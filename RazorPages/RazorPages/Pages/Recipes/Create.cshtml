@@ -5,7 +5,7 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     if (@Model.Status == "error")
     {
-        <script type="text/javascript">
+        <script tymargin"text /javascript">
             Swal.fire({
                 icon: 'error',
                 title: '@Model.Msg',
@@ -16,28 +16,28 @@
 }
 @{
     <br />
-    <form method="post" class="align-content-center border border-1 border-dark rounded col-6 " style="margin:auto;text-align:center;background-color:lightgrey;">
+    <body style="background-color:#1A2238;">
+    </body>
+    <form method="post" class="align-content-center col-6 " style="margin:auto;text-align:center;margin-top:50px;color:#1A2238">
         <div>
-            <div class="mt-4 col-4 m-auto">
-                <label asp-for="Recipe.Title" class="fw-bold"></label>
+            <div class="row mt-4 col-11 m-auto">
+                <label style="font:bolder;text-align:left" asp-for="Recipe.Title" class="fw-bold"></label>
                 <input asp-for="Recipe.Title" class="form-control">
                 <span asp-validation-for="Recipe.Title" class="text-danger"></span>
             </div>
-            <div class="mt-4 ">
-                <label asp-for="Recipe.Ingredients" class="fw-bold"></label>
-                <br>
+            <div class="row mt-4 col-11 m-auto">
+                <label style="font:bolder;text-align:left" asp-for="Recipe.Ingredients" class="fw-bold"></label>
                 <textarea name="Recipe.Ingredients" placeholder="After every ingredient press enter for new line." rows="5" cols="30"></textarea>
                 <span asp-validation-for="Recipe.Ingredients" class="text-danger"></span>
             </div>
-            <div class="mt-4">
-                <label asp-for="Recipe.Instructions" class="fw-bold"></label>
-                <br>
+            <div class="row mt-4 col-11 m-auto">
+                <label style="font:bolder;text-align:left" asp-for="Recipe.Instructions" class="fw-bold"></label>
                 <textarea name="Recipe.Instructions" placeholder="After every instructions press enter for new line." rows="5" cols="30"></textarea>
                 <span asp-validation-for="Recipe.Instructions" class="text-danger"></span>
             </div>
-            <div class="mt-4">
+            <div class="row mt-4 col-11 m-auto">
                 <form method="post">
-                    <label asp-for="Recipe.Categories" class="fw-bold">Choose one or more category</label>
+                    <label style="text-align:left" asp-for="Recipe.Categories" class="fw-bold">Choose one or more category</label>
                     <br>
                     <select name="Recipe.Categories" id="cars" multiple style="color:black">
                         @foreach (var obj in Model.Categories)
@@ -45,11 +45,11 @@
                             <option value=@obj>@obj</option>
                         }
                     </select>
-                    <p>Hold down the Ctrl (windows) or Command (Mac) button to select multiple options.</p>
+                    <p style="font-weight:bold">Hold down the Ctrl (windows) or Command (Mac) button to select multiple options.</p>
                     <span asp-validation-for="Recipe.Categories" class="text-danger"></span>
                 </form>
             </div>
-            <button type="submit" class="btn btn-outline-success"><i class="bi bi-plus-circle-fill"> Create</i></button>
+            <button type="submit" class="btn btn-success"><i class="bi bi-plus-circle-fill"> Create</i></button>
             <br><br>
         </div>
     </form>
