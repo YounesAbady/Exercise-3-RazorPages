@@ -45,6 +45,8 @@ namespace RazorPages.Pages.Recipes
             recipe.Instructions.RemoveAll(item => item == null);
             recipe.Ingredients.RemoveAll(item => item == null);
             recipe.Categories.RemoveAll(item => item == null);
+            recipe.Instructions[0] = recipe.Instructions[0].Replace("/", "-");
+            recipe.Ingredients[0] = recipe.Ingredients[0].Replace("/", "-");
             ValidationResult result = await _validator.ValidateAsync(recipe);
             if (result.IsValid)
             {
@@ -69,9 +71,9 @@ namespace RazorPages.Pages.Recipes
             {
                 foreach (var error in result.Errors)
                 {
-                    Msg+=($"{error.ErrorMessage} \n");
+                    Msg += ($"{error.ErrorMessage} \n");
                 }
-                Status="error";
+                Status = "error";
                 return RedirectToPage("Create", recipe);
             }
             return RedirectToPage();
