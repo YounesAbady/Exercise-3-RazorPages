@@ -26,7 +26,7 @@
                                 <button class="btn " style="background-color:#F4DB7D;color:black;" type="button" data-bs-toggle="collapse" data-bs-target=@("#"+"ing"+recipe.Id) aria-expanded="false" aria-controls=@("ing"+recipe.Id)>
                                     <i class="bi bi-search fst-normal"> Show Ingredients</i>
                                 </button>
-                                <div class="collapse" id=@("ing"+recipe.Id) style="color:white">
+                                <div class="collapse text-start" id=@("ing"+recipe.Id) style="color:white">
                                     @foreach (var ing in @recipe.Ingredients)
                             {
                                         <p class="card-text">- @ing</p>
@@ -36,7 +36,7 @@
                                 <button class="btn" style="background-color:#F4DB7D;color:black;margin-top:10px;" type="button" data-bs-toggle="collapse" data-bs-target=@("#"+"ins"+recipe.Id) aria-expanded="false" aria-controls=@("ins"+recipe.Id)>
                                     <i class="bi bi-search fst-normal"> Show Instructions</i>
                                 </button>
-                                <div class="collapse" id=@("ins"+recipe.Id) style="color:white">
+                                <div class="collapse text-start" id=@("ins"+recipe.Id) style="color:white">
                                     @foreach (var ins in @recipe.Instructions)
                             {
                                         <p class="card-text">- @ins</p>
@@ -46,7 +46,7 @@
                                 <button class="btn" style="background-color:#F4DB7D;color:black;margin-top:10px;" type="button" data-bs-toggle="collapse" data-bs-target=@("#"+"cat"+recipe.Id) aria-expanded="false" aria-controls=@("cat"+recipe.Id)>
                                     <i class="bi bi-search fst-normal"> Show Categories</i>
                                 </button>
-                                <div class="collapse" id=@("cat"+recipe.Id) style="color:white">
+                                <div class="collapse text-start" id=@("cat"+recipe.Id) style="color:white">
                                     @foreach (var cat in @recipe.Categories)
                             {
                                         <p class="card-text">- @cat</p>
