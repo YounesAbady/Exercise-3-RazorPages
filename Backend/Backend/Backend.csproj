@@ -10,7 +10,7 @@
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.9" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Spectre.Console" Version="0.44.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
 </Project>

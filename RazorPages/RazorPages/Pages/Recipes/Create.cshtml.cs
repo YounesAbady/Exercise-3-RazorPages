@@ -45,11 +45,12 @@ namespace RazorPages.Pages.Recipes
             recipe.Instructions.RemoveAll(item => item == null);
             recipe.Ingredients.RemoveAll(item => item == null);
             recipe.Categories.RemoveAll(item => item == null);
-            recipe.Instructions[0] = recipe.Instructions[0].Replace("/", "-");
-            recipe.Ingredients[0] = recipe.Ingredients[0].Replace("/", "-");
+
             ValidationResult result = await _validator.ValidateAsync(recipe);
             if (result.IsValid)
             {
+                recipe.Instructions[0] = recipe.Instructions[0].Replace("/", "-");
+                recipe.Ingredients[0] = recipe.Ingredients[0].Replace("/", "-");
                 var ing = recipe.Ingredients[0].Split("\r\n");
                 recipe.Ingredients = ing.ToList();
                 var ins = recipe.Instructions[0].Split("\r\n");
